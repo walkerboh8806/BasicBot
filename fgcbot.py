@@ -1,4 +1,3 @@
-
 # These are the dependecies. The bot depends on these to function, hence the name. Please do not change these unless your adding to them, because they can break the bot.
 
 import discord
@@ -6,6 +5,8 @@ import asyncio
 from discord.ext.commands import Bot
 from discord.ext import commands
 import platform
+import functions
+import smashgg
 
 
 # Here you can modify the bot's prefix and description and wether it sends help in direct messages or not.
@@ -37,42 +38,21 @@ async def on_ready():
 # This is a basic example of a call and response command. You tell it do "this" and it does it.
 
 @client.command()
-async def commands(*args):
-	await client.say("\r\n"+"ping"+"\r\n"+
-					 "whoami"+"\r\n"+
-					 "okay"+"\r\n"+
-					 "notokay"+"\r\n"+
-					 "twitter"+"\r\n"+
-					 "facebook"+"\r\n"+
-					 "tournament"+"\r\n")
-
-@client.command()
-async def ping(*args):
-	await client.say(":ping_pong: Pong!")
-
-@client.command()
-async def whoami(*args):
-	await client.say("I am a bot being developed for CIFGC")
-
-@client.command()
-async def okay(*args):
-	await client.say(":thumbsup:")
-
-@client.command()
-async def notokay(*args):
-	await client.say(":thumbsdown:")
-
-@client.command()
-async def facebook(*args):
-	await client.say("https://www.facebook.com/groups/CentralIllinoisFGC/")
-
-@client.command()
-async def twitter(*args):
-	await client.say("https://www.twitter.com/CIFGCGaming/")
-
-@client.command()
 async def tournament(*args):
-	await client.say("In development: Show stats for current tournament")
+    flag = args[0]
+#    if flag == "add":
+#        functions.tournament_add(str(args[1]))
+#        await client.say("Added tournament: **" + args[1] + "**")
+#    elif flag == "remove":
+#        functions.tournament_remove(tournament)
+#        await client.say("Removed tournament: **" + args[1] + "**")
+    if flag == "list":
+        await client.say(functions.tournament_list())
+    elif flag =="results":
+        eventids = functions.get_eventids(args[1])
+        groupids = functions.get_groupids(eventids)
+        results = functions.get_player_standing(groupids)
+#async def tournament(*args):
 
 
 #run the client
