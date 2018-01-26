@@ -42,7 +42,7 @@ commands = ["commands list", "add", "list"]
 
 @client.command()
 async def info(*args):
-    await client.say("```add: add tournamnet raw data to database."+"\r\n"+"usage: -fgcbot add <tournament_name>"+"\r\n"+"\r\n"+"list: list all tournaments in database."+"\r\n"+"usage: -fgcbot list```")
+    await client.say("```add: add tournamnet raw data to database."+"\r\n"+"usage: -fgc add <tournament_name>"+"\r\n"+"\r\n"+"list: list all tournaments in database."+"\r\n"+"usage: -fgc list```")
 
 @client.command()
 async def list(*args):
