@@ -6,6 +6,12 @@ def list_tournaments():
     message = discordify(filenames)
     return message
 
+def list_players():
+    dir = '/home/samc/Dropbox/PycharmProjects/discord-bot/data/players_master'
+    filenames = os.listdir(dir)
+    message = discordify(filenames)
+    return message
+
 def discordify(message):
     base = "```"+"\r\n"
     for item in message:

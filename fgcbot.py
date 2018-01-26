@@ -43,6 +43,7 @@ async def on_ready():
 # -fgc <tournament> <game> results
 # -fgc <tournament> <game> seed
 # -fgc playerid stats  ##compile w/l for all tournaments/games/events/groups
+commands = ["info", "commands", "list", "add"]
 
 @client.command()
 async def info(*args):
@@ -53,10 +54,11 @@ async def info(*args):
 
 @client.command()
 async def commands():
-    command_add = discordify(["add: add a tournament's raw data to database", "usage: -fgc add <tournament_name>"])
-    command_list = discordify(["list: list things", "usage: -fgc list tournaments, -fgc list players"])
-    messages = [command_add, command_list]
-    await client.say(combine_discordify(messages))
+    commands = ["info", "commands", "list", "add"]
+    #command_add = discordify(["event: add, remove and view events", "usage: -fgc event add <tournament/player>"])
+    #command_list = discordify(["list: list things", "usage: -fgc list tournaments, -fgc list players"])
+    messages = commands
+    await client.say(discordify(messages))
 
 @client.command()
 async def list(*args):
@@ -64,22 +66,29 @@ async def list(*args):
         if args[0] == "tournaments":
             await client.say(list_tournaments())
         elif args[0] == "players":
-            await client.say(discordify(["Still under development"]))
+            await client.say(list_players())
     except IndexError:
         await client.say(discordify(["usage: -fgc list tournaments, -fgc list players"]))
-
 
 @client.command()
 async def add(*args):
     try:
-        #check = discordify([tournament_check(args[0])])
-        add = tournament_add_raw(args[0])
-        message = discordify(add)
-        await client.say(message)
+        if args[0] == "tournament":
+            try:
+                add = tournament_add_raw(args[1])
+                message = discordify(add)
+                await client.say(message)
+            except IndexError:
+                await client.say(discordify(["usage: -fgc add tournament <tournament_name>"]))
+        elif args[0] == "player":
+            try:
+            #add = tournament_add_raw(args[1])
+            #message = discordify(add)
+                await client.say(discordify(["Under development..."]))
+            except IndexError:
+                await client.say(discordify(["usage: -fgc add player <smashgg_gamertag (no prefix)"]))
     except IndexError:
-        await client.say(discordify(["usage: -fgc add <tournament_name>"]))
-#async def tournament(*args):
-
+        await client.say(discordify(["usage -fgc add <player/tournament>"]))
 
 #run the client
 client.run('NDA2MzQ0MDM3MTIyMDQ4MDAy.DUxk6A.MN7828IEU9YL_lwOQQyc4cUsLC8')

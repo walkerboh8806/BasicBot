@@ -47,9 +47,11 @@ def tournament_add_raw(tournament_name):
 # creates list of eventids from raw tournament json
 def get_eventids(t_json_raw):
     eventids = []
-    for event in t_json_raw['entities']['event']:
-        eventids.append(event['id'])
+    #for event in t_json_raw['entities']['event']:
+    #    eventids.append(event['id'])
+    eventids = t_json_raw['entities']['tournament']['eventIds']
     return eventids
+
 
 # creates json file with raw data for each event in the tournament (SFV, I2,
 def get_event_raw(eventid):
@@ -58,7 +60,7 @@ def get_event_raw(eventid):
     # need to create folder per event
     return json.loads(response.content.decode('utf-8'))
 
-
+# gets groupids from an event
 def get_groupids(e_json_raw):
     groupids = []
     for group in e_json_raw['entities']['groups']:
@@ -69,3 +71,11 @@ def get_group_raw(groupid):
     url = "https://api.smash.gg/phase_group/" + str(groupid) + "?expand[]=entrants&expand[]=seeds&expand[]=sets"
     response = requests.get(url)
     return json.loads(response.content.decode('utf-8'))
+
+# END OF JSON CREATION FUNCTIONS
+#######################################################
+#
+#
+# BEGIN FILE PARSING
+
+
