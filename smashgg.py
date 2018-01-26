@@ -5,6 +5,8 @@ import requests
 import json
 import os                   
 
+# need a way to force remove and download data
+
 # checks that tournament is a real tournament with information
 # checks if there is already a directory in data with the same name
 def tournament_check(tournament_name):
