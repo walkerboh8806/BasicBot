@@ -28,11 +28,11 @@ async def on_ready():
     print('Use this link to invite {}:'.format(client.user.name))
     print('https://discordapp.com/oauth2/authorize?client_id={}&scope=bot&permissions=8'.format(client.user.id))
     print('--------')
-    print('Support Discord Server: https://discord.gg/FNNNgqb')
-    print('Github Link: https://github.com/Habchy/BasicBot')
+    print('You are running FGCBot, fork of BasicBot v2.1 by Habchy#1665') #Do not change this. This will really help us support you, if you need support.
     print('--------')
-    print('You are running BasicBot v2.1') #Do not change this. This will really help us support you, if you need support.
-    print('Created by Habchy#1665')
+    print('FGCBot by CAPsMANyo')
+    print('Github Link: https://github.com/walkerboh8806/FGCBot')
+    print('--------')
     return await client.change_presence(game=discord.Game(name='-fgc info')) #This is buggy, let us know if it doesn't work.
 
 
