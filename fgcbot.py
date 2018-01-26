@@ -38,24 +38,46 @@ async def on_ready():
 
 
 # This is a basic example of a call and response command. You tell it do "this" and it does it.
-commands = ["commands list", "add", "list"]
+
+# -fgc playerid gamertag ## need a list of gamertag-to-playerid
+# -fgc <tournament> <game> results
+# -fgc <tournament> <game> seed
+# -fgc playerid stats  ##compile w/l for all tournaments/games/events/groups
 
 @client.command()
 async def info(*args):
-    await client.say("```add: add tournamnet raw data to database."+"\r\n"+"usage: -fgc add <tournament_name>"+"\r\n"+"\r\n"+"list: list all tournaments in database."+"\r\n"+"usage: -fgc list```")
+    info_info = discordify(["Hello I am FGCBot.  I interface with websites like smash.gg to give you stats on your tournaments", "type '-fgc commands' for commands'"])
+    info_github = discordify(["BasicBot: https://github.com/Habchy/BasicBot", "FGCBot: https://github.com/walkerboh8806/FGCBot"])
+    messages = [info_info, info_github]
+    await client.say(combine_discordify(messages))
+
+@client.command()
+async def commands():
+    command_add = discordify(["add: add a tournament's raw data to database", "usage: -fgc add <tournament_name>"])
+    command_list = discordify(["list: list things", "usage: -fgc list tournaments, -fgc list players"])
+    messages = [command_add, command_list]
+    await client.say(combine_discordify(messages))
 
 @client.command()
 async def list(*args):
-    await client.say(list_tournaments())
+    try:
+        if args[0] == "tournaments":
+            await client.say(list_tournaments())
+        elif args[0] == "players":
+            await client.say(discordify(["Still under development"]))
+    except IndexError:
+        await client.say(discordify(["usage: -fgc list tournaments, -fgc list players"]))
+
 
 @client.command()
 async def add(*args):
-    await client.say("Give me some time if it's a large tournament...")
-    check = tournament_check(args[0])
-    add = tournament_add_raw(args[0])
-    message =check+"\r\n"+add
-    await client.say(message)
-
+    try:
+        #check = discordify([tournament_check(args[0])])
+        add = tournament_add_raw(args[0])
+        message = discordify(add)
+        await client.say(message)
+    except IndexError:
+        await client.say(discordify(["usage: -fgc add <tournament_name>"]))
 #async def tournament(*args):
 
 
