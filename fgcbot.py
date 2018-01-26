@@ -12,7 +12,7 @@ from functions import *
 
 
 # Here you can modify the bot's prefix and description and wether it sends help in direct messages or not.
-client = Bot(description="Basic Bot by Habchy#1665", command_prefix="-fgcbot ", pm_help = False)
+client = Bot(description="Basic Bot by Habchy#1665", command_prefix="-fgc ", pm_help = False)
 
 
 
@@ -33,7 +33,7 @@ async def on_ready():
     print('--------')
     print('You are running BasicBot v2.1') #Do not change this. This will really help us support you, if you need support.
     print('Created by Habchy#1665')
-    return await client.change_presence(game=discord.Game(name='TOURNAMENT STATS')) #This is buggy, let us know if it doesn't work.
+    return await client.change_presence(game=discord.Game(name='-fgc info')) #This is buggy, let us know if it doesn't work.
 
 
 
@@ -41,9 +41,8 @@ async def on_ready():
 commands = ["commands list", "add", "list"]
 
 @client.command()
-async def commands(*args):
-    if args[0] == "list":
-        await client.say("```add: add tournamnet raw data to database."+"\r\n"+"usage: -fgcbot add <tournament_name>"+"\r\n"+"\r\n"+"list: list all tournaments in database."+"\r\n"+"usage: -fgcbot list```")
+async def info(*args):
+    await client.say("```add: add tournamnet raw data to database."+"\r\n"+"usage: -fgcbot add <tournament_name>"+"\r\n"+"\r\n"+"list: list all tournaments in database."+"\r\n"+"usage: -fgcbot list```")
 
 @client.command()
 async def list(*args):
@@ -61,4 +60,4 @@ async def add(*args):
 
 
 #run the client
-client.run('NDA1Nzk3NDkxOTM4Njg5MDI1.DUpn9Q.uEs3GLRyT2mSajGk58Bk5Ec1uo0')
+client.run('NDA2MzQ0MDM3MTIyMDQ4MDAy.DUxk6A.MN7828IEU9YL_lwOQQyc4cUsLC8')
