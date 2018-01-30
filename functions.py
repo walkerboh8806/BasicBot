@@ -1,4 +1,15 @@
-import subprocess, os
+import subprocess, os, json
+
+gameids = {
+    "sfv": "7",
+    "mkx": "",
+    "t7": "17",
+    "mvci": "",
+    "dbfz": "287",
+    "gg": "36",
+    "i2": "35",
+}
+
 
 def list_tournaments():
     dir = '/home/samc/Dropbox/PycharmProjects/discord-bot/data/tournaments'
@@ -24,3 +35,16 @@ def combine_discordify(messages):
     for message in messages:
         final = final + message + "\r\n"
     return final
+
+
+#def generate_results(group_obj):
+
+#Looks up gameid from game name
+def get_gameid(game_name):
+    try:
+        gameid = gameids['gamename']
+        return gameid
+    except KeyError:
+        return "Game not found"
+
+

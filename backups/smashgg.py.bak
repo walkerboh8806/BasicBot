@@ -3,7 +3,7 @@
 import urllib
 import requests
 import json
-import os                   
+import os
 
 # need a way to force remove and download data
 
@@ -30,15 +30,19 @@ def tournament_add_raw(tournament_name):
         with(open(directory + "/raw/tournament.json", 'w+')) as f:
             json.dump(t_json_raw, f)
         eventids = get_eventids(t_json_raw)
+        event_obj = []
         for event in eventids:
             event_json_raw = get_event_raw(event)
-            with(open(directory + "/raw/event" + str(event) + ".json", 'w+')) as f:
-                json.dump(event_json_raw, f)
+            event_obj.append(event_json_raw)
             groupids = get_groupids(event_json_raw)
+            group_obj = []
             for group in groupids:
                 group_json_raw = get_group_raw(group)
-                with(open(directory + "/raw/group_" + str(event) + "_" + str(group) + ".json", 'w+')) as f:
-                    json.dump(group_json_raw, f)
+                group_obj.append(group_obj)
+        with(open(directory + "/raw/events.json", 'w+')) as f:
+            json.dump(event_obj, f)
+        with(open(directory + "/raw/groups.json", 'w+')) as f:
+            json.dump(group_json_raw, f)
         return ["TournamentID: "+str(response['result'])+" found and added."]
     else:
         return "Unknown error occurred, check log."
@@ -65,6 +69,7 @@ def get_groupids(e_json_raw):
     groupids = []
     for group in e_json_raw['entities']['groups']:
         groupids.append(group['id'])
+    print(groupids)
     return groupids
 
 def get_group_raw(groupid):
@@ -77,5 +82,7 @@ def get_group_raw(groupid):
 #
 #
 # BEGIN FILE PARSING
-
-
+def make_results_full(tournament_name):
+    groups_raw = json.load(open('data/tournaments/'+tournament_name+'/raw/groups.json'))
+    #for group in groups_raw:
+    print(groups_raw)
